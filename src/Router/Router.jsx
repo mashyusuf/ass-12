@@ -12,6 +12,8 @@ import ErrorPage from "../pages/errorPage/ErrorPage";
 import Statistic from "../pages/dashboardEra/Common/Statistic";
 import AddMedicine from "../pages/dashboardEra/Seller/AddMedicine";
 import Mylistings from "../pages/dashboardEra/Seller/Mylistings";
+import Profile from "../pages/dashboardEra/Common/Profile";
+import ManageUsers from "../pages/dashboardEra/Admin/ManageUser";
 
 export const router = createBrowserRouter([
     {
@@ -40,6 +42,10 @@ export const router = createBrowserRouter([
                 element: <Login />
             },
             {
+                path: '/profile',
+                element: <Profile></Profile>
+            },
+            {
                 path: '/signUp',
                 element: <SingUp />
             },
@@ -64,6 +70,10 @@ export const router = createBrowserRouter([
             {
                 path: 'my-listing',
                 element: <Mylistings></Mylistings>
+            },
+            {
+                path: 'manage-users',
+                element: <ManageUsers></ManageUsers>
             },
         ]
     }

@@ -7,14 +7,43 @@ import avatarImg from '../../assets/placeholder.jpg';
 import logo from '../../assets/logo.jpg';
 import { FaCartPlus } from "react-icons/fa";
 import useCart from '../../hooks/useCart';
+import HostModal from '../../Components/Modal/SellerRequestModal';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
+import toast from 'react-hot-toast'
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
+  const axiosSecure = useAxiosSecure()
   const [activeItem, setActiveItem] = useState('');
  const [cart] = useCart();
+ const [isModalOpen , setIsModalOpen] = useState(false)
   const [selectedLanguage, setSelectedLanguage] = useState('');
-
+  const closeModal = () =>{
+    setIsModalOpen(false)
+  }
+  const modalHandle = async () => {
+    console.log('Yooo I want To Be Seller');
+    try {
+      const currentUser = {
+        email: user?.email,
+        role: 'user',
+        status: 'Requested',
+      };
+      const { data } = await axiosSecure.put(`/user`, currentUser);
+      console.log(data);
+      if (data.modifiedCount > 0) {
+        toast.success('Request successfully submitted! Now wait for admin approval.');
+      } else {
+        toast.success('! Wait for admin approval.');
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error(err.message);
+    } finally {
+      closeModal();
+    }
+  };
   const handleItemClick = (item) => {
     setActiveItem(item);
   };
@@ -81,6 +110,18 @@ const Navbar = () => {
                 </select>
               </div>
             </div>
+            {/* Become A Host btn */}
+            <div className='hidden md:block'>
+             {/* {!user && (*/}
+                    <button
+                    onClick={()=> setIsModalOpen(true)}
+                      className='disabled:cursor-not-allowed cursor-pointer hover:bg-neutral-100 py-3 px-4 text-md font-bold bg-cyan-400 rounded-full  transition'
+                    >
+                     Seller your home
+                    </button>
+                 { /*)}*/}
+                </div>
+                <HostModal isOpen={isModalOpen} closeModal={closeModal} modalHandle={modalHandle}></HostModal>
             {/* Conditional rendering based on user authentication */}
             {user ? (
               // When user is logged in
@@ -117,11 +158,11 @@ const Navbar = () => {
                         Dashboard
                       </Link>
                       <Link
-                        to='/updateProfile'
+                        to='/profile'
                         className={`px-4 py-3 hover:bg-neutral-100 transition font-semibold ${activeItem === 'UpdateProfile' ? 'text-yellow-500 font-extrabold text-3xl' : 'text-black font-bold text-xl'} hover:text-orange-500`}
                         onClick={() => handleItemClick('UpdateProfile')}
                       >
-                        Update Your Profile
+                        Your Profile
                       </Link>
                       <div
                         onClick={logOut}

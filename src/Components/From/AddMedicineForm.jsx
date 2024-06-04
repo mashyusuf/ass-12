@@ -3,17 +3,18 @@ import useAuth from '../../hooks/useAuth';
 import { imageUpload } from '../../api/utils';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useMutation } from '@tanstack/react-query';
-import toast from 'react-hot-toast'
+import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+
 function AddMedicineForm() {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     itemName: '',
     description: '',
     image_url: null, // Ensure proper initialization
-    category: '', 
+    category: '',
     manufacturer: '',
     dosage: '',
     price: '',
@@ -27,8 +28,8 @@ function AddMedicineForm() {
     },
     onSuccess: () => {
       console.log('Data saved successfully');
-      toast.success('Medicine Added Successfully')
-      navigate('/dashboard/my-listing')
+      toast.success('Medicine Added Successfully');
+      navigate('/dashboard/my-listing');
     },
   });
 
@@ -85,26 +86,57 @@ function AddMedicineForm() {
       console.log('Medicine data:', medicineData);
     } catch (err) {
       console.error(err);
-      toast.error('Error You Room Was Not Added', err.message)
+      toast.error('Error: Your item was not added', err.message);
     }
   };
+
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', padding: '20px', backgroundColor: '#f0f0f0', borderRadius: '8px' }}>
-      <div style={{ marginBottom: '15px', display: 'flex', alignItems: 'center' }}>
-        <label style={{ color: 'blue', fontSize: '2xl', marginRight: '10px', fontWeight: 'bold', flex: '1' }}>Item Name:</label>
-        <input type="text" name="itemName" value={formData.itemName} onChange={handleChange} style={{ flex: '2', padding: '10px', paddingTop: '12px', paddingBottom: '12px' }} />
+    <form 
+      onSubmit={handleSubmit} 
+      className="flex flex-col p-8 rounded-lg" 
+      style={{ background: 'linear-gradient(135deg, #f0f0f0, #e0e0e0)' }}
+    >
+      <div className="mb-4 flex items-center">
+        <label className="text-xl font-bold mr-4 w-1/4 text-blue-700">Item Name:</label>
+        <input 
+          type="text" 
+          name="itemName" 
+          value={formData.itemName} 
+          onChange={handleChange} 
+          className="flex-1 p-3 border-2 border-blue-700 rounded-lg" 
+          style={{ backgroundColor: '#f9f9f9' }}
+        />
       </div>
-      <div style={{ marginBottom: '15px', display: 'flex', alignItems: 'center' }}>
-        <label style={{ color: 'blue', fontSize: '2xl', marginRight: '10px', fontWeight: 'bold', flex: '1' }}>Short Description:</label>
-        <textarea name="description" value={formData.shortDescription} onChange={handleChange} style={{ flex: '2', padding: '10px', paddingTop: '12px', paddingBottom: '12px' }} />
+      <div className="mb-4 flex items-center">
+        <label className="text-xl font-bold mr-4 w-1/4 text-blue-700">Short Description:</label>
+        <textarea 
+          name="description" 
+          value={formData.description} 
+          onChange={handleChange} 
+          className="flex-1 p-3 border-2 border-blue-700 rounded-lg" 
+          style={{ backgroundColor: '#f9f9f9' }}
+        />
       </div>
-      <div style={{ marginBottom: '15px', display: 'flex', alignItems: 'center' }}>
-        <label style={{ color: 'blue', fontSize: '2xl', marginRight: '10px', fontWeight: 'bold', flex: '1' }}>Image Upload:</label>
-        <input type="file" name="image_url" accept="image/*" onChange={handleImageChange} style={{ flex: '2', padding: '10px', paddingTop: '12px', paddingBottom: '12px' }} />
+      <div className="mb-4 flex items-center">
+        <label className="text-xl font-bold mr-4 w-1/4 text-blue-700">Image Upload:</label>
+        <input 
+          type="file" 
+          name="image_url" 
+          accept="image/*" 
+          onChange={handleImageChange} 
+          className="flex-1 p-3 border-2 border-blue-700 rounded-lg" 
+          style={{ backgroundColor: '#f9f9f9' }}
+        />
       </div>
-      <div style={{ marginBottom: '15px', display: 'flex', alignItems: 'center' }}>
-        <label style={{ color: 'blue', fontSize: '2xl', marginRight: '10px', fontWeight: 'bold', flex: '1' }}>Category:</label>
-        <select name="category" value={formData.category} onChange={handleChange} style={{ flex: '2', padding: '10px', paddingTop: '12px', paddingBottom: '12px' }}>
+      <div className="mb-4 flex items-center">
+        <label className="text-xl font-bold mr-4 w-1/4 text-blue-700">Category:</label>
+        <select 
+          name="category" 
+          value={formData.category} 
+          onChange={handleChange} 
+          className="flex-1 p-3 border-2 border-blue-700 rounded-lg" 
+          style={{ backgroundColor: '#f9f9f9' }}
+        >
           <option value="">Select a category</option>
           <option value="Vitamins & Supplements">Vitamins & Supplements</option>
           <option value="Cold & Flu">Cold & Flu</option>
@@ -114,9 +146,15 @@ function AddMedicineForm() {
           <option value="Pain Relief">Pain Relief</option>
         </select>
       </div>
-      <div style={{ marginBottom: '15px', display: 'flex', alignItems: 'center' }}>
-        <label style={{ color: 'blue', fontSize: '2xl', marginRight: '10px', fontWeight: 'bold', flex: '1' }}>Company:</label>
-        <select name="manufacturer" value={formData.company} onChange={handleChange} style={{ flex: '2', padding: '10px', paddingTop: '12px', paddingBottom: '12px' }}>
+      <div className="mb-4 flex items-center">
+        <label className="text-xl font-bold mr-4 w-1/4 text-blue-700">Company:</label>
+        <select 
+          name="manufacturer" 
+          value={formData.manufacturer} 
+          onChange={handleChange} 
+          className="flex-1 p-3 border-2 border-blue-700 rounded-lg" 
+          style={{ backgroundColor: '#f9f9f9' }}
+        >
           <option value="">Select a company</option>
           <option value="Pfizer">Pfizer</option>
           <option value="Johnson & Johnson">Johnson & Johnson</option>
@@ -130,19 +168,45 @@ function AddMedicineForm() {
           <option value="Eli Lilly">Eli Lilly</option>
         </select>
       </div>
-      <div style={{ marginBottom: '15px', display: 'flex', alignItems: 'center' }}>
-        <label style={{ color: 'blue', fontSize: '2xl', marginRight: '10px', fontWeight: 'bold', flex: '1' }}>Item Mass Unit:</label>
-        <input type="text" name="dosage" value={formData.massUnit} onChange={handleChange} style={{ flex: '2', padding: '10px', paddingTop: '12px', paddingBottom: '12px' }} />
+      <div className="mb-4 flex items-center">
+        <label className="text-xl font-bold mr-4 w-1/4 text-blue-700">Item Mass Unit:</label>
+        <input 
+          type="text" 
+          name="dosage" 
+          value={formData.dosage} 
+          onChange={handleChange} 
+          className="flex-1 p-3 border-2 border-blue-700 rounded-lg" 
+          style={{ backgroundColor: '#f9f9f9' }}
+        />
       </div>
-      <div style={{ marginBottom: '15px', display: 'flex', alignItems: 'center' }}>
-        <label style={{ color: 'blue', fontSize: '2xl', marginRight: '10px', fontWeight: 'bold', flex: '1' }}>Per Unit Price:</label>
-        <input type="number" name="price" value={formData.price} onChange={handleChange} style={{ flex: '2', padding: '10px', paddingTop: '12px', paddingBottom: '12px' }} />
+      <div className="mb-4 flex items-center">
+        <label className="text-xl font-bold mr-4 w-1/4 text-blue-700">Per Unit Price:</label>
+        <input 
+          type="number" 
+          name="price" 
+          value={formData.price} 
+          onChange={handleChange} 
+          className="flex-1 p-3 border-2 border-blue-700 rounded-lg" 
+          style={{ backgroundColor: '#f9f9f9' }}
+        />
       </div>
-      <div style={{ marginBottom: '15px', display: 'flex', alignItems: 'center' }}>
-        <label style={{ color: 'blue', fontSize: '2xl', marginRight: '10px', fontWeight: 'bold', flex: '1' }}>Discount Percentage:</label>
-        <input type="number" name="discount" value={formData.discount} onChange={handleChange} style={{ flex: '2', padding: '10px', paddingTop: '12px', paddingBottom: '12px' }} />
+      <div className="mb-4 flex items-center">
+        <label className="text-xl font-bold mr-4 w-1/4 text-blue-700">Discount Percentage:</label>
+        <input 
+          type="number" 
+          name="discount" 
+          value={formData.discount} 
+          onChange={handleChange} 
+          className="flex-1 p-3 border-2 border-blue-700 rounded-lg" 
+          style={{ backgroundColor: '#f9f9f9' }}
+        />
       </div>
-      <button type="submit" style={{ backgroundColor: 'blue', color: 'white', padding: '10px 20px', borderRadius: '5px', border: 'none', fontSize: '2xl', fontWeight: 'bold' }}>Submit</button>
+      <button 
+        type="submit" 
+        className="bg-blue-700 text-white p-3 rounded-lg border-none text-xl font-bold hover:bg-blue-800 transition duration-300"
+      >
+        Submit
+      </button>
     </form>
   );
 }

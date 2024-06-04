@@ -1,58 +1,140 @@
-import { FaAd, FaHome, FaList, FaMoneyBill, FaShoppingCart } from 'react-icons/fa';
+import { FaHome, FaList, FaMoneyBill, FaShoppingCart, FaUser } from 'react-icons/fa';
 import { NavLink, Outlet } from 'react-router-dom';
 import useCart from '../hooks/useCart';
 import { TbBuildingPavilion } from "react-icons/tb";
 import { CgFolderAdd } from "react-icons/cg";
-import logo from '../assets/logo.jpg'
+import logo from '../assets/logo.jpg';
+import useRole from '../hooks/useRole';
+import { MdPayment } from "react-icons/md";
+import { RiAdvertisementLine, RiVideoAddFill } from "react-icons/ri";
+import { FcSalesPerformance } from "react-icons/fc";
 const Dashboard = () => {
-    const [cart] = useCart()
+    const [cart] = useCart();
+    const [role, isLoading] = useRole();
+    console.log(role, isLoading);
     return (
         <div className="flex min-h-screen bg-gray-100">
             {/* Drawer */}
             <div className="w-80 bg-gradient-to-b from-sky-400 to-blue-600 text-white hidden md:flex flex-col">
                 <div className="p-6">
-                    <h2 className="text-3xl font-bold mb-4 flex gap-x-2"><img className='w-32' src={logo} alt="" />Medicine House</h2>
+                    <NavLink to={'/'} className="text-3xl font-bold mb-4 flex gap-x-2">
+                        <img className='w-32' src={logo} alt="" />Medicine House
+                    </NavLink>
                     <ul className="menu space-y-4">
                         <li>
-                            <NavLink 
+                            <NavLink
                                 className='flex items-center text-2xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
                                 to={'/dashboard'}
                                 end
                             >
-                                <TbBuildingPavilion  className="mr-2" /> Dashboard
+                                <TbBuildingPavilion className="mr-2" /> Dashboard
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink 
+                        
+                        {role === 'user' && (
+                            <>
+                            <li>
+                            <NavLink
                                 className='flex items-center text-xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
                                 to={'/dashboard/cart'}
                             >
                                 <FaShoppingCart className="mr-2" /> My Cart <span className='text-xl font-bold'>{cart.length}</span>
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink 
-                                className='flex items-center text-xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
-                                to={'/dashboard/add-room'}
-                            >
-                                <CgFolderAdd className="mr-2" /> Add Medicine
-                            </NavLink>
-                            <NavLink 
-                                className='flex items-center text-xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
-                                to={'/dashboard/my-listing'}
-                            >
-                                <FaList className="mr-2" /> My Medicine List
-                            </NavLink>
-                            <NavLink 
+                                <li>
+                            <NavLink
                                 className='flex items-center text-xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
                                 to={'/dashboard/payment-history'}
                             >
                                 <FaMoneyBill className="mr-2" /> Payment History
                             </NavLink>
+                             </li>
+                            </>
+                        )}
+                        {role === 'admin' && (
+                            <>
+                                <li>
+                                    <NavLink
+                                        className='flex items-center text-xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
+                                        to={'/dashboard/add-category'}
+                                    >
+                                        <CgFolderAdd className="mr-2" /> Add Category Madicine
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        className='flex items-center text-xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
+                                        to={'/dashboard/manage-users'}
+                                    >
+                                        <FaUser className="mr-2" />Manage Users
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        className='flex items-center text-xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
+                                        to={'/dashboard/payment'}
+                                    >
+                                        <MdPayment className="mr-2" />Payment Management
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        className='flex items-center text-xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
+                                        to={'/dashboard/sale'}
+                                    >
+                                        <FcSalesPerformance className="mr-2" /> Sales Report
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        className='flex items-center text-xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
+                                        to={'/dashboard/add'}
+                                    >
+                                        <RiVideoAddFill className="mr-2" /> All Advertise
+                                    </NavLink>
+                                </li>
+                            </>
+                        )}
+                        {role === 'seller' && (
+                            <>
+                                <li>
+                                    <NavLink
+                                        className='flex items-center text-xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
+                                        to={'/dashboard/add-room'}
+                                    >
+                                        <CgFolderAdd className="mr-2" /> Add Medicine
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        className='flex items-center text-xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
+                                        to={'/dashboard/my-listing'}
+                                    >
+                                        <FaList className="mr-2" /> My Medicine List
+                                    </NavLink>
+                                </li>
+                                <li>
+                            <NavLink
+                                className='flex items-center text-xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
+                                to={'/dashboard/seller-pay-history'}
+                            >
+                                <MdPayment className="mr-2" /> Payment History
+                            </NavLink>
                         </li>
+                                <li>
+                            <NavLink
+                                className='flex items-center text-xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
+                                to={'/dashboard/create-add'}
+                            >
+                               <RiAdvertisementLine  className="mr-2" /> Advertisement
+                            </NavLink>
+                        </li>
+                            </>
+                        )}
+                        
                         <div className='divider'></div>
                         <li>
-                            <NavLink 
+                            <NavLink
                                 className='flex items-center text-xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
                                 to={'/'}
                             >
@@ -82,7 +164,7 @@ const Dashboard = () => {
                     <ul className="menu p-4 w-80 bg-gradient-to-b from-sky-400 to-blue-600 text-white space-y-4">
                         {/* Sidebar content here */}
                         <li>
-                            <NavLink 
+                            <NavLink
                                 className='flex items-center text-xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
                                 to={'/dashboard/cart'}
                             >
@@ -90,7 +172,7 @@ const Dashboard = () => {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink 
+                            <NavLink
                                 className='flex items-center text-xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
                                 to={'/dashboard/payment-history'}
                             >
@@ -99,7 +181,7 @@ const Dashboard = () => {
                         </li>
                         <div className='divider'></div>
                         <li>
-                            <NavLink 
+                            <NavLink
                                 className='flex items-center text-xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
                                 to={'/'}
                             >
