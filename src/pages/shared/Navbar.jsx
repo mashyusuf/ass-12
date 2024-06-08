@@ -10,6 +10,7 @@ import useCart from '../../hooks/useCart';
 import HostModal from '../../Components/Modal/SellerRequestModal';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import toast from 'react-hot-toast'
+import useRole from '../../hooks/useRole';
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -18,6 +19,7 @@ const Navbar = () => {
   const [activeItem, setActiveItem] = useState('');
  const [cart] = useCart();
  const [isModalOpen , setIsModalOpen] = useState(false)
+ const [role, isLoading] = useRole()
   const [selectedLanguage, setSelectedLanguage] = useState('');
   const closeModal = () =>{
     setIsModalOpen(false)
@@ -51,6 +53,8 @@ const Navbar = () => {
   const handleChange = (event) => {
     setSelectedLanguage(event.target.value);
   };
+
+  if(isLoading) return <span className="loading loading-bars loading-lg"></span>
 
   return (
     <div className='fixed w-full z-10 shadow-sm' style={{ backgroundColor: '#4B0082' }}>
@@ -90,8 +94,8 @@ const Navbar = () => {
               >
                 <button className="btn">
                 <FaCartPlus className='text-2xl' />
-  <div className="badge badge-secondary">+{cart.length}</div>
-</button>
+      <div className="badge badge-secondary">+{cart.length}</div>
+          </button>
               </Link>
               <div>
                 <select
@@ -109,16 +113,47 @@ const Navbar = () => {
                   {/* Add more options as needed */}
                 </select>
               </div>
+
+              {role === 'admin' && (
+                            <>
+                            <Link
+                to='/dashboard'
+                className={`mx-4 ${activeItem === 'Shop' ? 'text-yellow-500 font-extrabold text-3xl' : 'text-white font-bold text-2xl'} hover:text-green-500`}
+                onClick={() => handleItemClick('Shop')}
+              >
+              Dashboard
+              </Link>
+                            </>
+                        )}
+              {role === 'seller' && (
+                            <>
+                            <Link
+                to='/dashboard'
+                className={`mx-4 ${activeItem === 'Shop' ? 'text-yellow-500 font-extrabold text-3xl' : 'text-white font-bold text-2xl'} hover:text-green-500`}
+                onClick={() => handleItemClick('Shop')}
+              >
+               Dashboard
+              </Link>
+                            </>
+                        )}
+
             </div>
             {/* Become A Host btn */}
             <div className='hidden md:block'>
              {/* {!user && (*/}
-                    <button
+             {role === 'user' && (
+                            <>
+                            <li>
+                            <button
                     onClick={()=> setIsModalOpen(true)}
                       className='disabled:cursor-not-allowed cursor-pointer hover:bg-neutral-100 py-3 px-4 text-md font-bold bg-cyan-400 rounded-full  transition'
                     >
                      Seller your home
                     </button>
+                        </li>
+                            </>
+                        )}
+                    
                  { /*)}*/}
                 </div>
                 <HostModal isOpen={isModalOpen} closeModal={closeModal} modalHandle={modalHandle}></HostModal>

@@ -1,12 +1,20 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import useAxiosCommon from '../../../../hooks/useAxiosCommon';
 import { FaCircle } from "react-icons/fa";
+import Swal from 'sweetalert2';
+import useAxiosSecure from '../../../../hooks/useAxiosSecure';
+import useAuth from '../../../../hooks/useAuth';
+import useCart from '../../../../hooks/useCart';
 
 const CardDetails = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
+  const [cart, refetch] = useCart();
   const axiosCommon = useAxiosCommon();
+  const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
 
   const { data: card = {}, isLoading } = useQuery({
     queryKey: ['card', id],
@@ -21,6 +29,52 @@ const CardDetails = () => {
   const truncateDescription = (desc) => {
     if (!desc) return "";
     return desc.split(" ").slice(0, 10).join(" ") + (desc.split(" ").length > 10 ? "..." : "");
+  };
+
+  const handleSelectMedicine = (medicine) => {
+    if (user && user.email) {
+      const cartItem = {
+        shopId: medicine._id,
+        email: user.email,
+        name: medicine.name,
+        price: medicine.price,
+        discount: medicine.discount, 
+        sellerEmail : medicine.seller?.email,
+        sellerName : medicine.seller?.name
+        };
+      axiosSecure.post('/carts', cartItem)
+        .then(res => {
+          if (res.data.insertedId) {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: `Your Cart Has Been Added`,
+              showConfirmButton: false,
+              timer: 1500
+            });
+            // Refetch cart to update the cart
+            refetch();
+          }
+        })
+        .catch(error => {
+          console.error('Error adding to cart:', error);
+        });
+    } else {
+      Swal.fire({
+        title: "You are Not Logged In?",
+        text: "Please Login To Add To The Cart!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Login!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate('/login', { state: { from: location } });
+        }
+      });
+    }
+    console.log("Medicine selected:", medicine, user.email);
   };
 
   return (
@@ -58,13 +112,19 @@ const CardDetails = () => {
               Description: <span className="text-sm">{truncateDescription(card.description)}</span>
             </p>
           </div>
-          <div className="flex justify-center mt-8">
+          <div className="flex justify-center mt-8 gap-x-6">
             <Link
               to="/"
-              className="btn mr-4 mb-4 bg-blue-700 text-white py-2 px-6 rounded-lg hover:bg-blue-800 hover:shadow-xl transition duration-300"
+              className="select-button btn btn-primary bg-indigo-600 text-white py-3 px-8 rounded-lg hover:bg-indigo-700 transition duration-300 text-lg"
             >
               Home
             </Link>
+            <button
+              onClick={() => handleSelectMedicine(card)}
+              className="select-button btn btn-primary bg-indigo-600 text-white py-3 px-8 rounded-lg hover:bg-indigo-700 transition duration-300 text-lg"
+            >
+              Select To Cart
+            </button>
           </div>
         </div>
       </div>

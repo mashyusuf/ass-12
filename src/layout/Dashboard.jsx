@@ -8,10 +8,11 @@ import useRole from '../hooks/useRole';
 import { MdPayment } from "react-icons/md";
 import { RiAdvertisementLine, RiVideoAddFill } from "react-icons/ri";
 import { FcSalesPerformance } from "react-icons/fc";
+import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 const Dashboard = () => {
     const [cart] = useCart();
     const [role, isLoading] = useRole();
-    console.log(role, isLoading);
+    console.log(isLoading);
     return (
         <div className="flex min-h-screen bg-gray-100">
             {/* Drawer */}
@@ -21,16 +22,6 @@ const Dashboard = () => {
                         <img className='w-32' src={logo} alt="" />Medicine House
                     </NavLink>
                     <ul className="menu space-y-4">
-                        <li>
-                            <NavLink
-                                className='flex items-center text-2xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
-                                to={'/dashboard'}
-                                end
-                            >
-                                <TbBuildingPavilion className="mr-2" /> Dashboard
-                            </NavLink>
-                        </li>
-                        
                         {role === 'user' && (
                             <>
                             <li>
@@ -44,7 +35,7 @@ const Dashboard = () => {
                                 <li>
                             <NavLink
                                 className='flex items-center text-xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
-                                to={'/dashboard/payment-history'}
+                                to={'/dashboard/history'}
                             >
                                 <FaMoneyBill className="mr-2" /> Payment History
                             </NavLink>
@@ -53,10 +44,20 @@ const Dashboard = () => {
                         )}
                         {role === 'admin' && (
                             <>
+                            <li>
+                            <NavLink
+                                className='flex items-center text-2xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
+                                to={'/dashboard/admin-dashboard'}
+                                end
+                            >
+                                <TbBuildingPavilion className="mr-2" /> Dashboard
+                            </NavLink>
+                        </li>
                                 <li>
+                                    
                                     <NavLink
                                         className='flex items-center text-xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
-                                        to={'/dashboard/add-category'}
+                                        to={'/dashboard/addCategory'}
                                     >
                                         <CgFolderAdd className="mr-2" /> Add Category Madicine
                                     </NavLink>
@@ -72,7 +73,7 @@ const Dashboard = () => {
                                 <li>
                                     <NavLink
                                         className='flex items-center text-xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
-                                        to={'/dashboard/payment'}
+                                        to={'/dashboard/admin-payment'}
                                     >
                                         <MdPayment className="mr-2" />Payment Management
                                     </NavLink>
@@ -80,7 +81,15 @@ const Dashboard = () => {
                                 <li>
                                     <NavLink
                                         className='flex items-center text-xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
-                                        to={'/dashboard/sale'}
+                                        to={'/dashboard/manage-pro'}
+                                    >
+                                        <MdOutlineProductionQuantityLimits className="mr-2" /> Manage Products
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        className='flex items-center text-xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
+                                        to={'/dashboard/admin-sales'}
                                     >
                                         <FcSalesPerformance className="mr-2" /> Sales Report
                                     </NavLink>
@@ -88,7 +97,7 @@ const Dashboard = () => {
                                 <li>
                                     <NavLink
                                         className='flex items-center text-xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
-                                        to={'/dashboard/add'}
+                                        to={'/dashboard/manage-add'}
                                     >
                                         <RiVideoAddFill className="mr-2" /> All Advertise
                                     </NavLink>
@@ -97,6 +106,15 @@ const Dashboard = () => {
                         )}
                         {role === 'seller' && (
                             <>
+                            <li>
+                            <NavLink
+                                className='flex items-center text-2xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
+                                to={'/dashboard/seller-dashboard'}
+                                end
+                            >
+                                <TbBuildingPavilion className="mr-2" /> Dashboard
+                            </NavLink>
+                        </li>
                                 <li>
                                     <NavLink
                                         className='flex items-center text-xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
@@ -116,7 +134,7 @@ const Dashboard = () => {
                                 <li>
                             <NavLink
                                 className='flex items-center text-xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
-                                to={'/dashboard/seller-pay-history'}
+                                to={'/dashboard/seller-payment'}
                             >
                                 <MdPayment className="mr-2" /> Payment History
                             </NavLink>
@@ -124,7 +142,7 @@ const Dashboard = () => {
                                 <li>
                             <NavLink
                                 className='flex items-center text-xl font-semibold transition duration-300 ease-in-out transform hover:scale-105'
-                                to={'/dashboard/create-add'}
+                                to={'/dashboard/ad-seller'}
                             >
                                <RiAdvertisementLine  className="mr-2" /> Advertisement
                             </NavLink>

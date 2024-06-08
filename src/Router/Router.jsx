@@ -14,6 +14,20 @@ import AddMedicine from "../pages/dashboardEra/Seller/AddMedicine";
 import Mylistings from "../pages/dashboardEra/Seller/Mylistings";
 import Profile from "../pages/dashboardEra/Common/Profile";
 import ManageUsers from "../pages/dashboardEra/Admin/ManageUser";
+import PrivateRouter from './PrivateRouter'
+import AdminRoute from "./AdminRoute";
+import SellerRoute from "./SellerRoute";
+import Payment from "../pages/dashboardEra/Payment/Payment";
+import PaymentHistory from "../pages/dashboardEra/Payment History/PaymentHistory";
+import SellerDashboard from "../pages/dashboardEra/Seller/SellerDashboard";
+import AdminStatistics from "../pages/dashboardEra/Admin/AdminDashboard";
+import AddCategory from "../pages/dashboardEra/Admin/AddCategory";
+import AdSeller from "../pages/dashboardEra/Seller/AdSelller";
+import ManageBannerAdvertise from "../pages/dashboardEra/Admin/ManageBannerAdvertise";
+import ManagePro from "../pages/dashboardEra/Admin/ManagePro";
+import PaymentForAdmin from "../pages/dashboardEra/Admin/PaymentForAdmin";
+import SalesReport from "../pages/dashboardEra/Admin/SalesReport";
+import SellerPayment from "../pages/dashboardEra/Seller/SellerPayment";
 
 export const router = createBrowserRouter([
     {
@@ -35,7 +49,7 @@ export const router = createBrowserRouter([
             },
             {
                 path:"/cardDetails/:id", 
-                element: <CardDetails></CardDetails>,
+                element:<PrivateRouter><CardDetails></CardDetails></PrivateRouter> ,
             },
             {
                 path: '/login',
@@ -53,27 +67,74 @@ export const router = createBrowserRouter([
     },
     {
         path:'dashboard',
-        element: <Dashboard></Dashboard>,
+        element: <PrivateRouter><Dashboard></Dashboard></PrivateRouter>,
         children:[
             {
                 index: true,
-                element: <Statistic></Statistic>
+                element: <PrivateRouter><Statistic></Statistic></PrivateRouter>
             },
             {
                 path:'cart',
-                element: <Cart></Cart>
+                element: <PrivateRouter><Cart></Cart></PrivateRouter>
+            },
+            {
+                path:'payment',
+                element: <PrivateRouter><Payment></Payment> </PrivateRouter>
+            },
+            {
+                path:'history',
+                element: <PrivateRouter><PaymentHistory></PaymentHistory> </PrivateRouter>
+            },
+            //-------Seller Era---------------------
+            {
+                path: 'seller-dashboard',
+                element:<PrivateRouter> <SellerRoute> <SellerDashboard></SellerDashboard>  </SellerRoute></PrivateRouter>
             },
             {
                 path: 'add-room',
-                element: <AddMedicine></AddMedicine>
+                element:<PrivateRouter> <SellerRoute><AddMedicine></AddMedicine></SellerRoute></PrivateRouter>
             },
             {
                 path: 'my-listing',
-                element: <Mylistings></Mylistings>
+                element: <PrivateRouter><SellerRoute><Mylistings></Mylistings></SellerRoute> </PrivateRouter>
+            },
+            {
+                path: 'ad-seller',
+                element: <PrivateRouter><SellerRoute> <AdSeller></AdSeller> </SellerRoute> </PrivateRouter>
+            },
+            {
+                path: 'seller-payment',
+                element: <PrivateRouter><SellerRoute> <SellerPayment></SellerPayment> </SellerRoute> </PrivateRouter>
+            },
+
+            //-----Admin Era------
+            {
+                path: 'admin-dashboard',
+                element: <PrivateRouter><AdminRoute> <AdminStatistics></AdminStatistics>   </AdminRoute></PrivateRouter>
+            },
+            {
+                path: 'addCategory',
+                element: <PrivateRouter><AdminRoute> <AddCategory></AddCategory>   </AdminRoute></PrivateRouter>
             },
             {
                 path: 'manage-users',
-                element: <ManageUsers></ManageUsers>
+                element: <PrivateRouter><AdminRoute><ManageUsers></ManageUsers></AdminRoute></PrivateRouter>
+            },
+            {
+                path: 'manage-add',
+                element: <PrivateRouter><AdminRoute> <ManageBannerAdvertise></ManageBannerAdvertise>  </AdminRoute></PrivateRouter>
+            },
+            {
+                path: 'manage-pro',
+                element: <PrivateRouter><AdminRoute> <ManagePro></ManagePro>  </AdminRoute></PrivateRouter>
+            },
+            {
+                path: 'admin-payment',
+                element: <PrivateRouter><AdminRoute> <PaymentForAdmin></PaymentForAdmin>  </AdminRoute></PrivateRouter>
+            },
+            {
+                path: 'admin-sales',
+                element: <PrivateRouter><AdminRoute> <SalesReport></SalesReport> </AdminRoute></PrivateRouter>
             },
         ]
     }
