@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { toast } from 'react-hot-toast';
+import useAuth from '../../../hooks/useAuth';
 
 function AdSeller() {
+    const {user} = useAuth()
     const axiosSecure = useAxiosSecure();
     const [medicines, setMedicines] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -32,12 +34,16 @@ function AdSeller() {
 
     const handleAddAdvertisement = async () => {
         try {
-            await axiosSecure.post('/Adver-medicines', newAd, { withCredentials: true });
-            setNewAd({ name: '', imageUrl: '', description: '', status: 'false' });
-            setIsModalOpen(false);
-            fetchMedicines();
+   
+            const sellerEmail = user.email;
+            const newAdWithSellerEmail = { ...newAd, sellerEmail };
+            await axiosSecure.post('/Adver-medicines', newAdWithSellerEmail, { withCredentials: true });
             
-            // Show toast notification
+            setNewAd({ name: '', imageUrl: '', description: '', status: 'true' });
+            setIsModalOpen(false);
+
+            fetchMedicines();
+
             toast.success('Advertisement added successfully!');
         } catch (error) {
             console.error('Error adding advertisement:', error);

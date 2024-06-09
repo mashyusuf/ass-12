@@ -148,7 +148,7 @@ const Navbar = () => {
                     onClick={()=> setIsModalOpen(true)}
                       className='disabled:cursor-not-allowed cursor-pointer hover:bg-neutral-100 py-3 px-4 text-md font-bold bg-cyan-400 rounded-full  transition'
                     >
-                     Seller your home
+                     Request To Be Seller
                     </button>
                         </li>
                             </>

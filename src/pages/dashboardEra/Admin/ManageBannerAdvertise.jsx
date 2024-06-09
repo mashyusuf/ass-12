@@ -1,5 +1,7 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { toast } from 'react-hot-toast';
+import { useQuery } from '@tanstack/react-query';
 
 function ManageBannerAdvertise() {
     const axiosSecure = useAxiosSecure();
@@ -8,6 +10,14 @@ function ManageBannerAdvertise() {
     useEffect(() => {
         fetchAdvertiseMedicines();
     }, []);
+    const { data: advertiseMedicine=[]} = useQuery({
+        queryKey:['advertiseMedicine'],
+        queryFn: async ()=>{
+            const res = await axiosSecure.get(`/advertise-medicines`, { withCredentials: true })
+            return res.data;
+        }
+    })
+    console.log(advertiseMedicine)
 
     const fetchAdvertiseMedicines = async () => {
         try {
@@ -18,11 +28,15 @@ function ManageBannerAdvertise() {
         }
     };
 
-    const handleToggleSlide = async (id) => {
+    const handleToggleSlide = async (id, addToSlide) => {
         try {
-            await axiosSecure.put(`/toggle-advertisement-slide/${id}`, {}, { withCredentials: true });
-            // Refresh advertise medicines after toggling
-            fetchAdvertiseMedicines();
+            await axiosSecure.put(`/toggle-advertisement-slide/${id}`, { addToSlide }, { withCredentials: true });
+            fetchAdvertiseMedicines(); // Refresh advertise medicines after toggling
+            if (addToSlide) {
+                toast.success('Advertisement added to slide!');
+            } else {
+                toast.success('Advertisement removed from slide!');
+            }
         } catch (error) {
             console.error('Error toggling advertisement slide:', error);
         }
@@ -47,10 +61,10 @@ function ManageBannerAdvertise() {
                             <td className="p-4"><img src={medicine.imageUrl} alt={medicine.name} style={{ width: '100px', height: '100px' }} /></td>
                             <td className="p-4 font-semibold">{medicine.name}</td>
                             <td className="p-4">{medicine.description}</td>
-                            <td className="p-4">{medicine.seller.email}</td>
+                            <td className="p-4">{medicine.sellerEmail}</td>
                             <td className="p-4">
-                                <button className={`px-4 py-2 rounded ${medicine.addToSlide ? 'bg-red-500 text-white' : 'bg-green-500 text-white'}`} onClick={() => handleToggleSlide(medicine._id)}>
-                                    {medicine.addToSlide ? 'Remove from Slide' : 'Add to Slide'}
+                                <button className={`px-4 py-2 rounded ${medicine.status ? 'bg-red-500 text-white' : 'bg-green-500 text-white'}`} onClick={() => handleToggleSlide(medicine._id, !medicine.status)}>
+                                    {medicine.status ? 'Remove from Slide' : 'Add to Slide'}
                                 </button>
                             </td>
                         </tr>

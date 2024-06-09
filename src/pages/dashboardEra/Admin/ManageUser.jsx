@@ -29,9 +29,9 @@ const ManageUsers = () => {
         <Helmet>
           <title>Manage Users</title>
         </Helmet>
-        <div className='py-8'>
-          <div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto'>
-            <h1 className='text-blue-600 font-bold'>Users : {users.length}</h1>
+        <div className=''>
+          <div className='-mx-4 sm:-mx-8 px-4 sm:px-8  overflow-x-auto'>
+            <h1 className=' mb-10 font-bold text-4xl text-sky-600 text-center'>All Users : {users.length}</h1>
             <div className='inline-block min-w-full shadow rounded-lg overflow-hidden'>
               <table className='min-w-full leading-normal'>
                 <thead>

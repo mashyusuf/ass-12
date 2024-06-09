@@ -144,6 +144,9 @@ function AddMedicineForm() {
           <option value="Allergy Relief">Allergy Relief</option>
           <option value="Antibiotics">Antibiotics</option>
           <option value="Pain Relief">Pain Relief</option>
+          <option value="Dog Medicine">Dog Medicine</option>
+          <option value="Cat  Medicine">Cat Medicine</option>
+          <option value="Animal Medicine">Animal Meicine</option>
         </select>
       </div>
       <div className="mb-4 flex items-center">

@@ -1,6 +1,7 @@
 import useAuth from '../../../hooks/useAuth'
 import { Helmet } from 'react-helmet-async'
 import useRole from '../../../hooks/useRole'
+import { Link } from 'react-router-dom'
 
 const Profile = () => {
   const { user,loading } = useAuth()
@@ -47,9 +48,11 @@ const Profile = () => {
               </p>
 
               <div>
+                <Link to={'/updateProfile'}>
                 <button className='bg-purple-500 px-10 py-1 rounded-lg text-white cursor-pointer hover:bg-purple-700 block mb-1'>
                   Update Profile
                 </button>
+                </Link>
                 <button className='bg-purple-500 px-7 py-1 rounded-lg text-white cursor-pointer hover:bg-purple-700'>
                   Change Password
                 </button>

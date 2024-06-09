@@ -28,6 +28,8 @@ import ManagePro from "../pages/dashboardEra/Admin/ManagePro";
 import PaymentForAdmin from "../pages/dashboardEra/Admin/PaymentForAdmin";
 import SalesReport from "../pages/dashboardEra/Admin/SalesReport";
 import SellerPayment from "../pages/dashboardEra/Seller/SellerPayment";
+import UpdateCategory from "../pages/dashboardEra/Admin/UpdateCategory";
+import UpdateProfile from "../Components/updateProfile/UpdateProfile";
 
 export const router = createBrowserRouter([
     {
@@ -62,6 +64,10 @@ export const router = createBrowserRouter([
             {
                 path: '/signUp',
                 element: <SingUp />
+            },
+            {
+                path: '/updateProfile',
+                element: <UpdateProfile></UpdateProfile>
             },
         ]
     },
@@ -135,6 +141,10 @@ export const router = createBrowserRouter([
             {
                 path: 'admin-sales',
                 element: <PrivateRouter><AdminRoute> <SalesReport></SalesReport> </AdminRoute></PrivateRouter>
+            },
+            {
+                path: 'updateCategory/:id',
+                element: <PrivateRouter> <AdminRoute> <UpdateCategory /> </AdminRoute></PrivateRouter>,
             },
         ]
     }
