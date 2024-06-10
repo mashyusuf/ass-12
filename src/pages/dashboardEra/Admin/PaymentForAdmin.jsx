@@ -2,6 +2,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { FaHourglassHalf, FaCheckCircle } from 'react-icons/fa'; // Import the icons from react-icons
+import { Helmet } from 'react-helmet-async';
 
 const PaymentForAdmin = () => {
     const axiosSecure = useAxiosSecure();
@@ -35,6 +36,9 @@ const PaymentForAdmin = () => {
 
     return (
         <div className="p-6">
+            <Helmet>
+                <title>Medicine House | Payment</title>
+            </Helmet>
             <h1 className="text-3xl font-bold text-blue-700 mb-4">Payments: {payments.length}</h1>
             <div className="overflow-x-auto">
                 <table className="table-auto w-full min-w-max">

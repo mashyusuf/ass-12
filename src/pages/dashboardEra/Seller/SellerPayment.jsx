@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import { useState } from "react";
-
+import { Helmet } from 'react-helmet-async';
 const SellerPayment = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
@@ -26,6 +26,9 @@ const SellerPayment = () => {
 
     return (
         <div className="bg-gray-200 p-6">
+            <Helmet>
+                <title>Medicine House | Payment</title>
+            </Helmet>
             <h1 className="text-3xl font-bold text-center mb-8">Seller Payment</h1>
             <div className="overflow-x-auto">
                 <table className="table-auto w-full border-collapse bg-white shadow-md">

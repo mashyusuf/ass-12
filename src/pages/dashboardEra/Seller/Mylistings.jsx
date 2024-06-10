@@ -5,7 +5,7 @@ import useAuth from "../../../hooks/useAuth";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import DeleteModal from "../../../Components/Modal/DeleteModal";
 import toast from "react-hot-toast";
-
+import { Helmet } from 'react-helmet-async';
 const Mylistings = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
@@ -63,6 +63,9 @@ const Mylistings = () => {
 
     return (
         <div className="bg-gray-100 py-8 px-4">
+            <Helmet>
+                <title>Medicine House | My List</title>
+            </Helmet>
             <h1 className="text-2xl font-bold mb-4">My Listing Page: {medicines.length}</h1>
             <div className="overflow-x-auto">
                 <table className="table w-full text-md md:text-xl bg-white shadow-md rounded-lg">

@@ -7,6 +7,8 @@ import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import useAuth from '../../../../hooks/useAuth';
 import useCart from '../../../../hooks/useCart';
+import { Helmet } from 'react-helmet-async';
+
 
 const CardDetails = () => {
   const navigate = useNavigate();
@@ -79,6 +81,9 @@ const CardDetails = () => {
 
   return (
     <div>
+      <Helmet>
+                <title>Medicine House | Details</title>
+            </Helmet>
       <div className="grid grid-cols-1 my-10 md:grid-cols-2 gap-8 items-center justify-center hover:scale-105 transition">
         {/* Image Layer */}
         <div className="relative rounded-lg overflow-hidden shadow-lg">

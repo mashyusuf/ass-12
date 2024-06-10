@@ -7,6 +7,7 @@ import cate from '../../../assets/cate.jpg';
 import { Link, useNavigate } from 'react-router-dom';
 import { useQuery } from "@tanstack/react-query";
 import Swal from 'sweetalert2'; // Import Swal for the confirmation dialog
+import { Helmet } from 'react-helmet-async';
 
 const AddCategory = () => {
     const navigate = useNavigate();
@@ -112,6 +113,9 @@ const AddCategory = () => {
 
     return (
         <div className="flex flex-col items-center justify-center h-screen bg-blue-50">
+            <Helmet>
+                <title>Medicine House | Add Category</title>
+            </Helmet>
             <Toaster />
             <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-xl">
                 <div className="mb-8 text-center">

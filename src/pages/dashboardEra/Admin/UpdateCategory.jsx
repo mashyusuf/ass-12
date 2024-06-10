@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
+import { Helmet } from 'react-helmet-async';
 
 const UpdateCategory = () => {
     const { id } = useParams(); // Get categoryId from route params
@@ -51,6 +52,9 @@ const UpdateCategory = () => {
 
     return (
         <div className="max-w-md mx-auto mt-8 bg-white p-6 rounded-lg shadow-md">
+            <Helmet>
+                <title>Medicine House |Update Category</title>
+            </Helmet>
             <h2 className="text-2xl font-bold mb-4 text-center">Update Category</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div>

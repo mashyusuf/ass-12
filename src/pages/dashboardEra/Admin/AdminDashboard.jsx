@@ -1,6 +1,7 @@
 import { FaUsers, FaMoneyBillWave, FaShoppingCart } from 'react-icons/fa'
 import useAxiosSecure from '../../../hooks/useAxiosSecure'
 import { useQuery } from '@tanstack/react-query'
+import { Helmet } from 'react-helmet-async';
 
 const AdminStatistics = () => {
   const axiosSecure = useAxiosSecure();
@@ -28,6 +29,9 @@ const AdminStatistics = () => {
 
   return (
     <div>
+      <Helmet>
+                <title>Medicine House | Dashboard</title>
+            </Helmet>
       <div className='mt-12'>
         {/* small cards */}
         <div className='mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 lg:grid-cols-3 justify-between'>

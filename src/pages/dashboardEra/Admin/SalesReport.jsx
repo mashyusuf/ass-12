@@ -8,6 +8,7 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
+import { Helmet } from 'react-helmet-async';
 
 const SalesReport = () => {
     const axiosSecure = useAxiosSecure();
@@ -79,7 +80,9 @@ const SalesReport = () => {
     };
 
     return (
-        <div className="p-4">
+        <div className="p-4"> <Helmet>
+        <title>Medicine House | Sales Report</title>
+    </Helmet>
             <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">Sales Report</h1>
             <div className="mb-4 flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0 md:space-x-4">
                 <div className="flex space-x-2">

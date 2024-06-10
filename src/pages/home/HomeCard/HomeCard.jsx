@@ -15,15 +15,6 @@ const HomeCard = () => {
     })
     console.log(medicines)
 
-    const { data: medicineCount=[]} = useQuery({
-        queryKey:['medicine-count'],
-        queryFn: async ()=>{
-            const res = await axiosCommon.get(`medicine-counts`)
-            return res.data;
-        }
-    })
-    console.log(medicineCount)
-
 
     const getMedicineCount = (category) => {
         const categoryData = counts.find(count => count.category === category);
@@ -47,8 +38,6 @@ const HomeCard = () => {
                         </div>
                         <div className="mt-4">
                             <h3 className="text-2xl font-semibold text-indigo-600 dark:text-indigo-400">{item.category}</h3>
-                            <p className="mt-2 text-gray-700 dark:text-gray-300">Available Medicines: {getMedicineCount(item.category)}
-                            </p>
                         </div>
                     </Link>
                 ))}

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { toast } from 'react-hot-toast';
 import { useQuery } from '@tanstack/react-query';
+import { Helmet } from 'react-helmet-async';
 
 function ManageBannerAdvertise() {
     const axiosSecure = useAxiosSecure();
@@ -44,6 +45,9 @@ function ManageBannerAdvertise() {
 
     return (
         <div>
+            <Helmet>
+                <title>Medicine House | Advertiesment</title>
+            </Helmet>
             <h1 className="text-3xl font-bold my-6">Manage Banner Advertise</h1>
             <table className="w-full bg-gray-200">
                 <thead>

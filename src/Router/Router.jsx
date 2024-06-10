@@ -43,7 +43,8 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/shop',
-                element: <Shop />
+                element: <Shop />,
+                loader: ()=> fetch('http://localhost:8000/totalMedicineCount')
             },
             {
                 path:"/cardName/:category", 

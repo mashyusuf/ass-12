@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import Swal from 'sweetalert2';
+import { Helmet } from "react-helmet-async";
 
 const ManagePro = () => {
     const axiosSecure = useAxiosSecure();
@@ -62,6 +63,9 @@ const ManagePro = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Medicine House | Manage Products</title>
+            </Helmet>
             <div className="overflow-x-auto">
                 <table className="table bg-gray-200">
                     <thead>

@@ -31,22 +31,25 @@ const Home = () => {
                 <title>Medicine House | Home</title>
             </Helmet>
             <Banner />
-            {advertisements.length > 0 && (
-                <div className="m-20">
-                    <ShowAdvertisement advertisements={advertisements} />
-                </div>
-            )}
+            
             <HomeCard />
             <div className="m-20">
                 <DiscountProductsSlider />
             </div>
             <div>
-                <h1 className='text-4xl bg-sky-600 font-bold text-center text-green-400 '>Here Is Your Best Doctors</h1>
-                <p className="text-sm mb-10 text-black text-center bg-sky-600 font-extrabold">
+                <div className=''>
+                <h1 className='text-4xl py-8 bg-sky-600 font-bold text-center text-green-400 '>Here Is Your Best Doctors</h1>
+                <p className="text-sm mb-10 p-4 text-black text-center bg-sky-600 font-extrabold">
                     Meet our diverse team of dedicated healthcare professionals: Dr. John Doe specializes in family medicine, Dr. Jane Smith excels in dermatology and cosmetic treatments, while Dr. Emily Johnson focuses on pediatric and adolescent medicine, collectively ensuring comprehensive and compassionate care for all patients.
                 </p>
+                </div>
                 <DoctorAppoinment />
             </div>
+            {advertisements.length > 0 && (
+                <div className="m-20">
+                    <ShowAdvertisement advertisements={advertisements} />
+                </div>
+            )}
             <MarqueeSection />
         </div>
     );

@@ -2,7 +2,7 @@ import { FaDollarSign } from 'react-icons/fa'
 import { BsFillCartPlusFill, BsFillHouseDoorFill } from 'react-icons/bs'
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
-
+import { Helmet } from 'react-helmet-async';
 const  SellerDashboard = () => {
     const axiosSecure = useAxiosSecure();
 
@@ -29,6 +29,9 @@ const  SellerDashboard = () => {
 
   return (
     <div className="bg-gray-100 py-8 px-4">
+      <Helmet>
+                <title>Medicine House | Dashboard</title>
+            </Helmet>
       <div className='mt-12'>
         {/* small cards */}
         <div className='mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { toast } from 'react-hot-toast';
 import useAuth from '../../../hooks/useAuth';
-
+import { Helmet } from 'react-helmet-async';
 function AdSeller() {
     const {user} = useAuth()
     const axiosSecure = useAxiosSecure();
@@ -52,6 +52,9 @@ function AdSeller() {
     
     return (
         <div className="min-h-screen bg-gray-100 flex flex-col items-center">
+            <Helmet>
+                <title>Medicine House | Advertisement</title>
+            </Helmet>
             <h1 className="text-3xl font-bold my-6">Advertisement Management</h1>
             <button
                 className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
