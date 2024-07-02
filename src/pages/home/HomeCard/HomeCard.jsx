@@ -2,14 +2,16 @@ import {  useState } from 'react';
 import { Link } from "react-router-dom";
 import useAxiosCommon from '../../../hooks/useAxiosCommon'
 import { useQuery } from '@tanstack/react-query';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 const HomeCard = () => {
     const [counts] = useState([]);
     const axiosCommon = useAxiosCommon()
+    const axiosSecure = useAxiosSecure()
 
     const { data: medicines=[]} = useQuery({
         queryKey:['data'],
         queryFn: async ()=>{
-            const res = await axiosCommon.get(`medicine`)
+            const res = await axiosSecure.get(`medicine`)
             return res.data;
         }
     })

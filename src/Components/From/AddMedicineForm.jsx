@@ -27,7 +27,7 @@ function AddMedicineForm() {
       return data;
     },
     onSuccess: () => {
-      console.log('Data saved successfully');
+      //console.log('Data saved successfully');
       toast.success('Medicine Added Successfully');
       navigate('/dashboard/my-listing');
     },
@@ -83,9 +83,9 @@ function AddMedicineForm() {
         image_url: uploadedImageUrl, // Change to uploadedImageUrl for consistency
       };
       await mutateAsync(medicineData);
-      console.log('Medicine data:', medicineData);
+     // console.log('Medicine data:', medicineData);
     } catch (err) {
-      console.error(err);
+      //console.error(err);
       toast.error('Error: Your item was not added', err.message);
     }
   };
@@ -211,6 +211,7 @@ function AddMedicineForm() {
         Submit
       </button>
     </form>
+    
   );
 }
 

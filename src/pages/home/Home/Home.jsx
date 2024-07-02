@@ -7,6 +7,7 @@ import DoctorAppoinment from "../../../Components/two extra seaction/DoctorAppoi
 import MarqueeSection from "../../../Components/two extra seaction/Marquee";
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import ShowAdvertisement from '../../../Components/ShowAd/ShowAdvertisement';
+import ContactUs from '../../../Components/contact/ContactUs'
 
 const Home = () => {
     const axiosSecure = useAxiosSecure();
@@ -47,9 +48,10 @@ const Home = () => {
             </div>
             {advertisements.length > 0 && (
                 <div className="m-20">
-                    <ShowAdvertisement advertisements={advertisements} />
+                <ShowAdvertisement advertisements={advertisements} />
                 </div>
             )}
+            
             <MarqueeSection />
         </div>
     );

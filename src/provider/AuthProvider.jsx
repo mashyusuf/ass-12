@@ -88,9 +88,7 @@ const AuthProvider = ({ children }) => {
       }
       setLoading(false)
     })
-    return () => {
-      return unsubscribe()
-    }
+    return unsubscribe
   }, [])
 
   const authInfo = {
