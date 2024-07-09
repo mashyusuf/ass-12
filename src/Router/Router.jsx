@@ -44,7 +44,7 @@ export const router = createBrowserRouter([
             {
                 path: '/shop',
                 element: <Shop />,
-                loader: ()=> fetch('http://localhost:8000/totalMedicineCount')
+                loader: ()=> fetch('https://assingment12-two.vercel.app/totalMedicineCount')
             },
             {
                 path:"/cardName/:category", 
