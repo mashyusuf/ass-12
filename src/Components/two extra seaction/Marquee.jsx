@@ -1,11 +1,9 @@
+import React from 'react';
 import Marquee from 'react-fast-marquee';
 import { FiMail, FiPhone, FiUser } from 'react-icons/fi'; // Importing React Icons
-import mojo from '../../assets/mojo.jpg';
-import apple from '../../assets/apple.jpg';
-import walton from '../../assets/walton.jpg';
-import image1 from '../../assets/4.webp';
-import image2 from '../../assets/5.jpg';
-import image3 from '../../assets/5.png';
+import bg from '../../assets/umbg.jpg'; // Your background image
+import Swal from 'sweetalert2'; // Import SweetAlert2
+
 
 const fakeReviews = [
     {
@@ -75,112 +73,129 @@ const fakeReviews = [
 ];
 
 const MarqueeSection = () => {
-    return (
-        <div className="bg-gradient-to-r from-blue-500 via-purple-500 mb-10 to-pink-500 text-white py-12 px-4">
-            <div className="max-w-8xl mx-auto mb-12">
-                <h2 className="text-4xl font-bold text-center mb-10">Our Sponsors</h2>
-                <Marquee speed={80} gradient={false} className="flex justify-center">
-                    {[mojo, apple, walton, image1, image2, image3].map((image, index) => (
-                        <div key={index} className="h-28 w-24 mx-6 bg-white rounded-lg shadow-md flex items-center justify-center transform transition-transform hover:scale-110">
-                            <img src={image} alt={`Sponsor ${index + 1}`} className="h-16 w-16 object-contain" />
-                        </div>
-                    ))}
-                </Marquee>
-            </div>
+    // Form submit handler
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Thank you!',
+            text: 'Your message has been sent successfully.',
+            icon: 'success',
+            confirmButtonText: 'Close'
+        });
+    };
 
-            <div className="max-w-2xl mx-auto p-10 bg-rose-200 shadow-lg rounded-lg mb-20">
-                <h1 className="text-3xl font-bold mb-2 text-center text-indigo-900">Contact With Us</h1>
-                <p className="text-lg text-gray-700 font-bold text-center mb-2">Your Trusted Yusuf Pharmacy!</p>
-                <p className="text-lg text-center text-gray-600">Providing quality medicines with convenience and care.</p>
-                <form className="space-y-6">
+    return (
+        <div 
+            className="bg-cover bg-center p-10 mb-10" 
+            style={{ backgroundImage: `url(${bg})`, backgroundSize: 'cover' }}>
+            <div className="max-w-4xl mx-auto bg-white bg-opacity-90 p-8 rounded-lg shadow-lg">
+                <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">Contact Us</h1>
+                <p className="text-lg text-center text-gray-600 mb-8">
+                    For Brixton Online Store Inquiries
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="text-center">
+                        <h2 className="text-lg font-bold text-gray-800">Hours of Operation</h2>
+                        <p className="text-sm text-gray-600">9:00 to 17:00, Mon-Fri (Excluding Holidays)</p>
+                    </div>
+                    <div className="text-center">
+                        <h2 className="text-lg font-bold text-gray-800">Phone</h2>
+                        <p className="text-sm text-gray-600">+8801729804092</p>
+                    </div>
+                    <div className="text-center">
+                        <h2 className="text-lg font-bold text-gray-800">General Inquiries</h2>
+                        <p className="text-sm text-gray-600">info@yusufpharmacy.com</p>
+                    </div>
+                </div>
+                <form className="space-y-6 mt-8" onSubmit={handleSubmit}>
                     <div>
-                        <label htmlFor="name" className="block text-xl font-bold text-indigo-700 mb-2">
+                        <label htmlFor="name" className="block text-lg font-bold text-gray-800">
                             Name
                         </label>
-                        <div className="relative rounded-md shadow-sm">
+                        <div className="relative mt-1 rounded-md shadow-sm">
                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <FiUser className="h-6 w-6 text-indigo-500" aria-hidden="true" />
+                                <FiUser className="h-5 w-5 text-gray-400" aria-hidden="true" />
                             </div>
                             <input
                                 type="text"
                                 id="name"
                                 name="name"
-                                className="focus:ring-purple-500 focus:border-purple-500 block w-full pl-12 pr-3 py-3 border border-indigo-300 rounded-md bg-indigo-100 text-indigo-900 placeholder-indigo-400"
+                                required
+                                className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                                 placeholder="Your Name"
                             />
                         </div>
                     </div>
                     <div>
-                        <label htmlFor="phone" className="block text-xl font-bold text-indigo-700 mb-2">
+                        <label htmlFor="phone" className="block text-lg font-bold text-gray-800">
                             Phone Number
                         </label>
-                        <div className="relative rounded-md shadow-sm">
+                        <div className="relative mt-1 rounded-md shadow-sm">
                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <FiPhone className="h-6 w-6 text-indigo-500" aria-hidden="true" />
+                                <FiPhone className="h-5 w-5 text-gray-400" aria-hidden="true" />
                             </div>
                             <input
                                 type="tel"
                                 id="phone"
                                 name="phone"
-                                className="focus:ring-purple-500 focus:border-purple-500 block w-full pl-12 pr-3 py-3 border border-indigo-300 rounded-md bg-indigo-100 text-indigo-900 placeholder-indigo-400"
+                                required
+                                className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                                 placeholder="Phone Number"
                             />
                         </div>
                     </div>
                     <div>
-                        <label htmlFor="email" className="block text-xl font-bold text-indigo-700 mb-2">
+                        <label htmlFor="email" className="block text-lg font-bold text-gray-800">
                             Email Address
                         </label>
-                        <div className="relative rounded-md shadow-sm">
+                        <div className="relative mt-1 rounded-md shadow-sm">
                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <FiMail className="h-6 w-6 text-indigo-500" aria-hidden="true" />
+                                <FiMail className="h-5 w-5 text-gray-400" aria-hidden="true" />
                             </div>
                             <input
                                 type="email"
                                 id="email"
                                 name="email"
-                                className="focus:ring-purple-500 focus:border-purple-500 block w-full pl-12 pr-3 py-3 border border-indigo-300 rounded-md bg-indigo-100 text-indigo-900 placeholder-indigo-400"
+                                required
+                                className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                                 placeholder="Your Email"
                             />
                         </div>
                     </div>
                     <div>
-                        <label htmlFor="message" className="block text-xl font-bold text-indigo-700 mb-2">
+                        <label htmlFor="message" className="block text-lg font-bold text-gray-800">
                             Message
                         </label>
                         <textarea
                             id="message"
                             name="message"
                             rows="4"
-                            className="focus:ring-purple-500 focus:border-purple-500 block w-full px-3 py-3 border border-indigo-300 rounded-md bg-indigo-100 text-indigo-900 placeholder-indigo-400"
+                            required
+                            className="block w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             placeholder="Your Message"
                         ></textarea>
                     </div>
                     <div className="text-center">
                         <button
                             type="submit"
-                            className="inline-block bg-purple-600 text-white px-8 py-4 rounded-full hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 text-xl font-bold"
+                            className="inline-block bg-indigo-600 text-white px-6 py-3 rounded-full hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 text-lg font-bold"
                         >
-                            Submit
+                            Send Message
                         </button>
                     </div>
                 </form>
             </div>
-            <h1 className="text-3xl font-bold text-sky-400 mt-5 text-center">
-    Share Your Experience
-</h1>
-<p className="text-lg text-black mb-8 text-center">
-    We value your feedback! Let us know how we can improve and serve you better. Your insights help us provide the best service possible.
-</p>
 
-            <div className="max-w-8xl mx-auto grid grid-cols-3 gap-6">
-                
+            <h1 className="text-3xl font-bold text-white mt-10 text-center">Share Your Experience</h1>
+            <p className="text-lg text-white mb-8 text-center">Your feedback helps us improve and serve you better.</p>
+
+            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
                 {fakeReviews.map((item) => (
-                    <div key={item.id} className="bg-white rounded-lg shadow-md p-4">
+                    <div key={item.id} className="bg-white bg-opacity-90 rounded-lg shadow-md p-4">
                         <div className="flex items-center mb-3">
                             <img src={item.avatar} alt={item.user} className="h-12 w-12 rounded-full object-cover mr-3" />
                             <div>
-                                <h3 className="text-lg font-bold text-indigo-900">{item.user}</h3>
+                                <h3 className="text-lg font-bold text-gray-800">{item.user}</h3>
                                 <div className="flex items-center text-yellow-400">
                                     {Array.from({ length: Math.floor(item.rating) }, (_, index) => (
                                         <svg key={index} xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 fill-current" viewBox="0 0 20 20">

@@ -34,20 +34,20 @@ const Home = () => {
             <Banner />
             
             <HomeCard />
-            <div className="m-20">
+            <div className="mt-4 mb-4">
                 <DiscountProductsSlider />
             </div>
             <div>
                 <div className=''>
-                <h1 className='text-4xl py-8 bg-sky-600 font-bold text-center text-green-400 '>Here Is Your Best Doctors</h1>
-                <p className="text-sm mb-10 p-4 text-black text-center bg-sky-600 font-extrabold">
+                <h1 className='text-4xl pt-4 bg-sky-600 font-bold text-center text-green-400 '>Here Is Your Best Doctors</h1>
+                <p className="text-sm  p-4 text-black text-center bg-sky-600 font-extrabold">
                     Meet our diverse team of dedicated healthcare professionals: Dr. John Doe specializes in family medicine, Dr. Jane Smith excels in dermatology and cosmetic treatments, while Dr. Emily Johnson focuses on pediatric and adolescent medicine, collectively ensuring comprehensive and compassionate care for all patients.
                 </p>
                 </div>
                 <DoctorAppoinment />
             </div>
             {advertisements.length > 0 && (
-                <div className="m-20">
+                <div className="mt-2">
                 <ShowAdvertisement advertisements={advertisements} />
                 </div>
             )}
